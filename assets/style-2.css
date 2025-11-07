@@ -48,11 +48,14 @@ a:hover {
 }
 
 @media (min-width: 768px) {
-    .fixed-posi {
-        /* width: 50%;
-            margin-left: 50%;
-            min-height:100%; */
-        position: fixed;
+    .name {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    
+    .menulink {
+        display: inline-block;
+        font-size: 1rem;
     }
 }
 
