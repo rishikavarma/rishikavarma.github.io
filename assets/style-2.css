@@ -1,6 +1,31 @@
 .instilogo {
     height: 50px;
     filter: grayscale(20%);
+    display: block;
+    margin: 0 auto;
+}
+
+.instilogo-large {
+    height: 90px;
+}
+
+.mx-auto.mt-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 160px;
+}
+
+.years {
+    font-size: 16px;
+    margin-top: 4px;
+}
+
+.institution {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 8px;
 }
 
 a:hover {
