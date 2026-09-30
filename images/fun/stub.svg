@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-label="Photo coming soon">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#3a202c"/>
+      <stop offset="100%" stop-color="#100b0e"/>
+    </radialGradient>
+  </defs>
+  <rect width="960" height="640" fill="url(#g)"/>
+  <circle cx="480" cy="280" r="56" fill="none" stroke="#d98ba8" stroke-width="2" opacity="0.7"/>
+  <path d="M448 280h64M480 248v64" stroke="#f0a8c1" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+  <text x="480" y="400" text-anchor="middle" fill="#f3dfe6" font-family="Georgia, serif" font-size="28">photo coming soon</text>
+  <text x="480" y="438" text-anchor="middle" fill="#bda7b0" font-family="Helvetica, Arial, sans-serif" font-size="14" letter-spacing="2">DROP YOUR IMAGE HERE</text>
+</svg>
