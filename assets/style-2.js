@@ -1,4 +1,24 @@
 (() => {
+    // Google Analytics 4 — set your Measurement ID (Admin → Data streams → Web → Measurement ID)
+    const GA_MEASUREMENT_ID = "";
+
+    if (GA_MEASUREMENT_ID) {
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            window.dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+        gtag("js", new Date());
+        gtag("config", GA_MEASUREMENT_ID, {
+            anonymize_ip: true,
+        });
+    }
+
     const storageKey = "rishika-theme";
     const root = document.documentElement;
     const media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -60,6 +80,8 @@
             const stubSrc = "images/fun/stub.svg";
             const lightbox = document.getElementById("fun-lightbox");
             const lightboxImg = document.getElementById("fun-lightbox-img");
+            const galleryCache = new Map();
+            const galleryIndex = new Map();
 
             const showLine = (nextIndex) => {
                 funLine.classList.add("is-leaving");
@@ -74,7 +96,67 @@
 
             const schedule = () => {
                 window.clearInterval(timer);
-                timer = window.setInterval(() => showLine(index + 1), 4200);
+                timer = window.setInterval(() => showLine(index + 1), 8500);
+            };
+
+            const probeImage = (url) =>
+                new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                });
+
+            const loadGallery = async (slug) => {
+                if (galleryCache.has(slug)) return galleryCache.get(slug);
+
+                const folder = `images/fun/${slug}`;
+                let sources = [];
+
+                try {
+                    const res = await fetch(`${folder}/gallery.json`, { cache: "no-cache" });
+                    if (res.ok) {
+                        const files = await res.json();
+                        if (Array.isArray(files)) {
+                            sources = files
+                                .filter((name) => typeof name === "string" && name.trim())
+                                .map((name) => `${folder}/${name.trim()}`);
+                        }
+                    }
+                } catch (_) {
+                    /* fall through to numbered probe */
+                }
+
+                if (!sources.length) {
+                    const exts = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
+                    for (let n = 1; n <= 24; n += 1) {
+                        let found = null;
+                        for (const ext of exts) {
+                            const url = `${folder}/${n}${ext}`;
+                            if (await probeImage(url)) {
+                                found = url;
+                                break;
+                            }
+                        }
+                        if (found) sources.push(found);
+                        else if (sources.length) break;
+                        else if (n >= 3) break;
+                    }
+                }
+
+                if (!sources.length) sources = [stubSrc];
+                galleryCache.set(slug, sources);
+                return sources;
+            };
+
+            const nextGallerySrc = async (word) => {
+                const slug = word.getAttribute("data-gallery");
+                if (!slug) return word.getAttribute("href") || stubSrc;
+                const sources = await loadGallery(slug);
+                const current = galleryIndex.get(slug) || 0;
+                const src = sources[current % sources.length];
+                galleryIndex.set(slug, (current + 1) % sources.length);
+                return src;
             };
 
             const openLightbox = (href, label) => {
@@ -109,10 +191,12 @@
                 if (word) {
                     event.preventDefault();
                     event.stopPropagation();
-                    openLightbox(word.getAttribute("href"), word.textContent.trim());
+                    nextGallerySrc(word).then((src) => {
+                        openLightbox(src, word.textContent.trim());
+                    });
                     return;
                 }
-                if (event.target.closest("a.fun-home")) {
+                if (event.target.closest("a.fun-home") || event.target.closest("a.fun-ext")) {
                     event.stopPropagation();
                     return;
                 }
@@ -125,6 +209,7 @@
                     event.target.closest("a.fun-word") ||
                     event.target.closest("a.fun-support") ||
                     event.target.closest("a.fun-home") ||
+                    event.target.closest("a.fun-ext") ||
                     event.target.closest("#fun-line")
                 ) {
                     return;

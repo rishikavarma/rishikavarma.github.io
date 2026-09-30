@@ -1208,7 +1208,7 @@ html[data-theme="light"] .theme-toggle:hover {
 }
 
 .fun-word {
-    color: inherit;
+    color: var(--rose-gold);
     text-decoration: none;
     border-bottom: none;
     cursor: zoom-in;
@@ -1216,13 +1216,15 @@ html[data-theme="light"] .theme-toggle:hover {
 }
 
 .fun-word:hover,
-.fun-home:hover {
+.fun-home:hover,
+.fun-ext:hover {
     color: var(--rose-bright);
     text-decoration: none;
 }
 
-.fun-home {
-    color: inherit;
+.fun-home,
+.fun-ext {
+    color: var(--rose-gold);
     text-decoration: none;
     border-bottom: none;
     cursor: pointer;
@@ -1316,8 +1318,15 @@ html[data-theme="light"] .fun-support:hover {
     background: rgba(121, 55, 79, 0.06);
 }
 
+html[data-theme="light"] .fun-word,
+html[data-theme="light"] .fun-home,
+html[data-theme="light"] .fun-ext {
+    color: #9a5a72;
+}
+
 html[data-theme="light"] .fun-word:hover,
-html[data-theme="light"] .fun-home:hover {
+html[data-theme="light"] .fun-home:hover,
+html[data-theme="light"] .fun-ext:hover {
     color: #79374f;
 }
 
