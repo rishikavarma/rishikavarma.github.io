@@ -145,10 +145,10 @@ a:hover {
     margin: 0;
     color: var(--cream) !important;
     font-family: "Playfair Display", serif;
-    font-size: clamp(3.2rem, 8vw, 6.7rem) !important;
+    font-size: clamp(1.85rem, 4.2vw, 2.85rem) !important;
     font-weight: 600 !important;
-    line-height: 0.96;
-    letter-spacing: -0.045em;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     text-wrap: balance;
 }
 
@@ -248,7 +248,7 @@ a:hover {
 }
 
 .experience-hero .name {
-    font-size: clamp(3rem, 7vw, 5.5rem) !important;
+    font-size: clamp(1.75rem, 4vw, 2.6rem) !important;
 }
 
 .experience-hero .menur {
@@ -719,7 +719,7 @@ a:hover {
     }
 
     .name {
-        font-size: clamp(2.7rem, 14vw, 4.4rem) !important;
+        font-size: clamp(1.7rem, 7vw, 2.25rem) !important;
     }
 
     .profilepic {
