@@ -1,114 +1,58 @@
-// Initialize font properties
-const fontname = "Ubuntu";
-const fontweights = [300, 400]
+(() => {
+    const storageKey = "rishika-theme";
+    const root = document.documentElement;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const savedTheme = localStorage.getItem(storageKey);
 
-// Color properties
-const basecolor = "#777";
-const accentcolor = "#a00";
-const highlightcolor = "#111";
+    const setTheme = (theme) => {
+        root.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]')?.setAttribute(
+            "content",
+            theme === "dark" ? "#100b0e" : "#fff8fa"
+        );
 
-// const basecolor = "#888";
-// const accentcolor = "#222";
-// const highlight = "#111";
+        const button = document.querySelector(".theme-toggle");
+        if (!button) return;
 
-// Body properties
-const bodyfontweight = 300;
-const bodyfontsize = "12pt";
-const backgroundcolor = "#fff";
+        const nextTheme = theme === "dark" ? "light" : "dark";
+        button.setAttribute("aria-label", `Switch to ${nextTheme} mode`);
+        button.setAttribute("title", `Switch to ${nextTheme} mode`);
+        button.querySelector(".theme-toggle-label").textContent = theme;
+    };
 
-// Link properties
-const acolor = accentcolor;
-const adecoration = "none";
-// const ahovercolor = accentcolor;
-// const ahoverduration = "0.3s";
-// const ahoverdecoration = "none"; //none, underline, overline, dotted, color (https://www.w3schools.com/cssref/pr_text_text-decoration.asp)
+    setTheme(savedTheme || (media.matches ? "dark" : "light"));
 
-// Menu properties
-const menucolor = basecolor;
-const menufontsize = "14pt";
-const menudecoration = "none";
-// const menuhover = accentcolor;
-// const menuhoverduration = "0.3s";
-// const menuhoverdecoration = "none"; //none, underline, overline, dotted, color (https://www.w3schools.com/cssref/pr_text_text-decoration.asp)
+    document.addEventListener("DOMContentLoaded", () => {
+        const button = document.createElement("button");
+        button.className = "theme-toggle";
+        button.type = "button";
+        button.innerHTML = `
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+            <span class="theme-toggle-label"></span>
+        `;
+        document.body.appendChild(button);
+        setTheme(root.dataset.theme);
 
-// Header properties
-const headercolor = accentcolor;
-const headerfontsize = "18pt";
-const headerdecoration = "none";
-const namecolor = highlightcolor;
-const namefontsize = "23pt";
+        button.addEventListener("click", () => {
+            const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+            localStorage.setItem(storageKey, nextTheme);
+            setTheme(nextTheme);
+        });
 
+        const newsList = document.querySelector(".news-list");
+        const newsToggle = document.querySelector(".news-toggle");
+        if (newsList && newsToggle) {
+            newsToggle.addEventListener("click", () => {
+                const expanded = newsList.classList.toggle("is-expanded");
+                newsToggle.setAttribute("aria-expanded", String(expanded));
+                newsToggle.textContent = expanded ? "Show less" : "Show more";
+            });
+        }
+    });
 
-// Publication properties
-const ptitlecolor = accentcolor;
-const ptitlefontsize = bodyfontsize;
-const ptitleweight = bodyfontweight;
-const ptitledecoration = "none";
-const ptitlestyle = "normal";
-
-const authorcolor = accentcolor;
-const authorweight = bodyfontweight;
-const authordecoration = "none";
-const authorstyle = "normal";
-
-const selfcolor = highlightcolor;
-const selfweight = bodyfontweight;
-const selfdecoration = "none";
-const selfstyle = "normal";
-
-const tagcolor = accentcolor;
-const tagweight = bodyfontweight;
-const tagdecoration = "none";
-const tagstyle = "normal";
-
-const insttitlecolor = highlightcolor;
-const insttitlesize = "12px";
-const instyearcolor = accentcolor;
-const instyearsize = "11px";
-
-//     .institution {
-//             font - size: 12px;
-//             color: #222;
-//         }
-//   .years {
-//             font - size: 11px;
-//             color: #888;
-//         }
-
-// Works for sans serif, change otherwise
-$("head").append("<link href='https://fonts.googleapis.com/css2?family=" + fontname + ":wght@" + fontweights.join(';') + "&display=swap' rel='stylesheet' type='text/css'>");
-$("body").css("font-family", fontname);
-
-$("body").css("color", basecolor);
-$("body").css("font-weight", bodyfontweight);
-$("body").css("font-size", bodyfontsize);
-$("body").css("background-color", backgroundcolor);
-
-$("a").css("color", acolor);
-$("a").css("text-decoration", adecoration);
-
-$(".menulink").css("color", menucolor);
-$(".menulink").css("font-size", menufontsize);
-$(".menulink").css("text-decoration", menudecoration);
-
-$(".header").css("color", headercolor);
-$(".header").css("font-size", headerfontsize);
-$(".header").css("text-decoration", headerdecoration);
-$(".name").css("color", namecolor);
-$(".name").css("font-size", namefontsize);
-
-$(".papertitle").css("color", ptitlecolor);
-$(".papertitle").css("font-size", ptitlefontsize);
-$(".papertitle").css("font-weight", ptitleweight);
-$(".papertitle").css("text-decoration", ptitledecoration);
-$(".papertitle").css("font-style", ptitlestyle);
-
-$(".thisauthor").css("color", selfcolor);
-$(".thisauthor").css("font-weight", selfweight);
-$(".thisauthor").css("text-decoration", selfdecoration);
-$(".thisauthor").css("font-style", selfstyle);
-
-$(".institution").css("color", insttitlecolor);
-$(".institution").css("font-size", insttitlesize);
-$(".years").css("color", instyearcolor);
-$(".years").css("font-size", instyearsize);
+    media.addEventListener("change", (event) => {
+        if (!localStorage.getItem(storageKey)) {
+            setTheme(event.matches ? "dark" : "light");
+        }
+    });
+})();

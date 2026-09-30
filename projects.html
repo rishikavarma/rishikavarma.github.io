@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Research projects — Rishika Varma Kalidindi">
+    <meta name="author" content="Rishika Varma Kalidindi">
+    <meta name="theme-color" content="#100b0e">
+
+    <link rel="icon" type="image/svg+xml" href="images/nicons/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/nicons/apple-touch-icon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="images/nicons/favicon-32x32.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="images/nicons/favicon-16x16.svg">
+
+    <script src="assets/style-2.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/style-2.css">
+
+    <title>Projects — Rishika Varma Kalidindi</title>
+  </head>
+  <body>
+    <header class="top-bar">
+      <nav class="top-contacts">
+        <a class="menulink" href="index.html">home</a>
+        <a class="menulink" href="projects.html">projects</a>
+        <a class="menulink" target="_blank" href="assets/rishika_cv.pdf">curriculum vitae</a>
+      </nav>
+    </header>
+
+    <section class="site-section section-hero section-light experience-hero">
+      <div class="container section-inner pt-5 allstuffp">
+        <div class="row pt-4 allstuff">
+          <div class="col-12 text-center">
+            <p class="name">Projects</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section project-section project-dark project-align-left">
+      <div class="container section-inner">
+        <article class="project-content">
+          <h2 class="project-title">LiteLib</h2>
+          <p class="project-description">
+            With Yi Chen, Site Fan, Po-Yu Hou, Maizhe Zhang, and Peng Huang.
+            LiteLib studies how to contain the impact of failures in stateful applications using compact replicas:
+            smaller, cheaper standbys that preserve enough state to recover quickly without the cost of full replication.
+            The project explores replica design and recovery mechanisms that keep applications available when primary
+            replicas fail, and is accepted to appear at NSDI&nbsp;2027.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="site-section project-section project-light project-align-right">
+      <div class="container section-inner">
+        <article class="project-content">
+          <h2 class="project-title">Hardware Model Validation</h2>
+          <p class="project-description">
+            With Reto Achermann and Andrea Lattuada, at MPI-SWS and the University of Michigan.
+            Verifying low-level system code requires an abstract hardware model, but the result is only as trustworthy
+            as that model. Validating a formal model against real hardware is difficult because observable behavior
+            depends on many invisible microarchitectural steps. This project develops a more tractable approach to
+            checking x86 memory-management-unit models against real machines, and led to our PLOS&nbsp;2026 paper
+            <em>Towards Tractable Hardware Model Validation Against Real Hardware</em>.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="site-section project-section project-dark project-align-left">
+      <div class="container section-inner">
+        <article class="project-content">
+          <h2 class="project-title">AI Manager</h2>
+          <p class="project-description">
+            With Ryan Huang and Mosharaf Chowdhury at the University of Michigan.
+            Modern applications increasingly embed AI features, but operating systems still treat AI runtimes as
+            ordinary user processes. This project explores OS-level management of multiple AI runtimes at once,
+            so concurrent applications can share accelerators, memory, and scheduling policies more safely and
+            efficiently when AI workloads interfere with one another.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="site-section project-section project-light project-align-right">
+      <div class="container section-inner">
+        <article class="project-content">
+          <h2 class="project-title">5G Anomaly Detection</h2>
+          <p class="project-description">
+            With Zixu Tian and Mohan Gurusamy at the National University of Singapore.
+            5G network slicing expands the attack surface of the distributed user plane, where univariate KPI
+            monitors often miss context-dependent anomalies. We built an extensible simulated 5G / SDN testbed and a
+            dual-branch Transformer that jointly models temporal dependencies and inter-metric correlations, with
+            cross-attention fusion and patch-wise masking for robust reconstruction under partial observability.
+            Experiments on real network traffic show effective detection of diverse user-plane anomalies; the work
+            appeared at IEEE CNS&nbsp;2025.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="project-footer">
+      <div class="container section-inner">
+        <a href="index.html">&larr; Back to home</a>
+      </div>
+    </footer>
+  </body>
+</html>
